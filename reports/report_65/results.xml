@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2025-03-28" name="report_65" tests="12" failures="0" skipped="0" flaky="0" time="2.828">
+	<testsuite id="0" name="OctTreeTest" package="/home/jamie/GodotProjects/octtreeimangry/test" timestamp="2025-03-28T18:04:27" hostname="localhost" tests="7" failures="0" errors="0" skipped="0" flaky="0" time="0.000">
+		<testcase name="Test_AddElement" classname="OctTreeTest" time="0.035">
+		</testcase>
+		<testcase name="Test_FindElementsInBox" classname="OctTreeTest" time="0.015">
+		</testcase>
+		<testcase name="Test_RemoveElement" classname="OctTreeTest" time="0.033">
+		</testcase>
+		<testcase name="Test_UpdateElement" classname="OctTreeTest" time="0.033">
+		</testcase>
+		<testcase name="Test_MaxElementsPerNode" classname="OctTreeTest" time="0.032">
+		</testcase>
+		<testcase name="Test_AddElementsAtDifferentPositions" classname="OctTreeTest" time="0.033">
+		</testcase>
+		<testcase name="Test_EmptyResults" classname="OctTreeTest" time="0.032">
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="OctTreeFuzzTests" package="/home/jamie/GodotProjects/octtreeimangry/test" timestamp="2025-03-28T18:04:27" hostname="localhost" tests="5" failures="0" errors="0" skipped="0" flaky="0" time="0.000">
+		<testcase name="Test_FuzzAddAndSearch" classname="OctTreeFuzzTests" time="0.070">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:72" type="FAILURE">
+<![CDATA[
+ObjectAssert initial error: current is primitive <System.Int32>
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzRemove" classname="OctTreeFuzzTests" time="1.051">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:144" type="FAILURE">
+<![CDATA[
+ObjectAssert initial error: current is primitive <System.Int32>
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzUpdate" classname="OctTreeFuzzTests" time="1.392">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:247" type="FAILURE">
+<![CDATA[
+Expecting: 'False' but is 'True'
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzBoundaryPositions" classname="OctTreeFuzzTests" time="0.004">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:360" type="FAILURE">
+<![CDATA[
+ObjectAssert initial error: current is primitive <System.Int32>
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzPerformance" classname="OctTreeFuzzTests" time="0.029">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:454" type="FAILURE">
+<![CDATA[
+ObjectAssert initial error: current is primitive <System.Int32>
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2025-03-29" name="report_78" tests="12" failures="0" skipped="0" flaky="0" time="3.526">
+	<testsuite id="0" name="OctTreeTest" package="/home/jamie/GodotProjects/octtreeimangry/test" timestamp="2025-03-29T17:20:01" hostname="localhost" tests="7" failures="0" errors="0" skipped="0" flaky="0" time="0.000">
+		<testcase name="Test_AddElement" classname="OctTreeTest" time="0.034">
+		</testcase>
+		<testcase name="Test_FindElementsInBox" classname="OctTreeTest" time="0.016">
+		</testcase>
+		<testcase name="Test_RemoveElement" classname="OctTreeTest" time="0.019">
+		</testcase>
+		<testcase name="Test_UpdateElement" classname="OctTreeTest" time="0.032">
+		</testcase>
+		<testcase name="Test_MaxElementsPerNode" classname="OctTreeTest" time="0.032">
+		</testcase>
+		<testcase name="Test_AddElementsAtDifferentPositions" classname="OctTreeTest" time="0.032">
+		</testcase>
+		<testcase name="Test_EmptyResults" classname="OctTreeTest" time="0.032">
+		</testcase>
+	</testsuite>
+	<testsuite id="1" name="OctTreeFuzzTests" package="/home/jamie/GodotProjects/octtreeimangry/test" timestamp="2025-03-29T17:20:02" hostname="localhost" tests="5" failures="0" errors="0" skipped="0" flaky="0" time="0.000">
+		<testcase name="Test_FuzzAddAndSearch" classname="OctTreeFuzzTests" time="0.072">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:108" type="FAILURE">
+<![CDATA[
+Expecting be equal:
+    '2' but is '0'
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzRemove" classname="OctTreeFuzzTests" time="1.293">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:147" type="FAILURE">
+<![CDATA[
+Expecting be equal:
+    '500' but is '1500'
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzUpdate" classname="OctTreeFuzzTests" time="1.840">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:267" type="FAILURE">
+<![CDATA[
+Expecting: 'False' but is 'True'
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzBoundaryPositions" classname="OctTreeFuzzTests" time="0.005">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:381" type="FAILURE">
+<![CDATA[
+Expecting be equal:
+    '26' but is '2526'
+]]>
+			</failure>
+		</testcase>
+		<testcase name="Test_FuzzPerformance" classname="OctTreeFuzzTests" time="0.029">
+			<failure message="FAILED: /home/jamie/GodotProjects/octtreeimangry/test/OctTreeFuzzTests.cs:476" type="FAILURE">
+<![CDATA[
+Expecting be equal:
+    '5000' but is '7526'
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
