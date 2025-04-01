@@ -7,10 +7,11 @@ namespace OctTreeNamespace
     /// </summary>
     public class OctTree
     {
-        private const int  MAX_ELEMENTS_PER_NODE = 8;
+        private const int MAX_ELEMENTS_PER_NODE = 8;
         // maybe make loose?
         // private const int NODE_PADDING = 2
         private Vector3I BoundsSize;
+
         // Global element storage
         public List<OctElement> allElements = new List<OctElement>();
 
@@ -22,28 +23,88 @@ namespace OctTreeNamespace
 
         public OctNode root_node;
 
-        public OctTree(Vector3I BoundsSize){
-            root_node = new OctNode(0,-1);
+        public OctTree(Vector3I BoundsSize)
+        {
+            root_node = new OctNode(0, -1);
             this.BoundsSize = BoundsSize;
-            // add root_node to list.
             allNodes.Add(root_node);
         }
 
         public void AddElement(OctElement element)
         {
-            // we need to traverse our tree, start at root_node with a bounds_size, and subdivide if root has reached MAX_ELEMENTS_PER_NODE limit.
-            OctNode current_node = root_node;
-            // we need to traverse root_nodes children somehow.
-            if (IsOctantForElement(current_node,element)){
-                if(root_node.count >= MAX_ELEMENTS_PER_NODE){
-                    AddElementToNode(current_node,element);
-                } else {
-                    SplitNodeForElement(current_node,element);
-                }
-            } else {
-                current_node = allNodes[root_node.first_child];
+            // Add element to global storage
+            int elementIndex = allElements.Count;
+            allElements.Add(element);
+
+            // Start recursive traversal from root with the entire bounds
+            OctNode? targetNode = GetOctantRecursive(0, element, Vector3I.Zero, BoundsSize);
+
+            if (targetNode != null)
+            {
+                // Find the index of the target node
+                int nodeIndex = allNodes.IndexOf(targetNode.Value);
+
+                // Add the element to the node
+                AddElementToNode(nodeIndex, element, elementIndex);
             }
-            // if we have reached our limit, we should only create the needed partition, IE (if we have an extra in quadrant four where that quadrant would be split into 4 we instead split only the needed quadrant.)
+        }
+
+        public void AddElementToNode(int nodeIndex, OctElement element, int elementIndex)
+        {
+            OctNode node = allNodes[nodeIndex];
+
+            // Create a new element node and add it to the linked list
+            OctElementNode elementNode = new OctElementNode(elementIndex, node.first_child);
+            int elementNodeIndex = allElementNodes.Count;
+            allElementNodes.Add(elementNode);
+
+            // Update the node to point to the new element node
+            node.first_child = elementNodeIndex;
+            node.count++;
+            allNodes[nodeIndex] = node;
+        }
+
+
+        private OctNode? GetOctantRecursive(int nodeIndex, OctElement element, Vector3I currentNodeOrigin, Vector3I currentNodeSize)
+        {
+            // Check if the element fits in this node
+            if (!OctantHasElement(nodeIndex, element, currentNodeOrigin, currentNodeSize))
+            {
+                return null;
+            }
+
+            OctNode node = allNodes[nodeIndex];
+
+            // If this is a leaf node, return it
+            if (node.count != -1) // Leaf node
+            {
+                return node;
+            }
+
+            // This is an internal node, check each child
+            Vector3I halfSize = currentNodeSize.HalfSize();
+            for (int octant = 0; octant < 8; octant++)
+            {
+                Vector3I childOrigin = currentNodeOrigin.CalculateChildMin(halfSize, octant);
+                int childIndex = node.first_child + octant;
+
+                // Recursively check this child
+                OctNode? childResult = GetOctantRecursive(childIndex, element, childOrigin, halfSize);
+
+                if (childResult != null)
+                {
+                    return childResult; // Found a suitable node in this branch
+                }
+            }
+            // If we reach here, none of the children contain the element
+            return node; // Return this node as a fallback
+        }
+
+        private bool OctantHasElement(int nodeIndex, OctElement element, Vector3I currentNodeOrigin, Vector3I currentNodeSize)
+        {
+            Vector3I nodeMax = currentNodeOrigin.CalculateNodeMax(currentNodeSize);
+            Vector3I elementMax = element.position.CalculateNodeMax(element.size);
+            return currentNodeOrigin.Intersects(nodeMax, element.position, elementMax);
         }
 
         public void RemoveElement(OctElement element)
@@ -53,21 +114,6 @@ namespace OctTreeNamespace
 
         public void UpdateElement(OctElement element)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public bool IsOctantForElement(OctNode node, OctElement element)
-        {
-            // check if the current_node contains the element.
-            // this would include either storing the bounds of each node, or calculating on the fly using bit shifting based on BoundsSize and some sort of depth calculation, there might be a quick way to roughly calculate which Octant it is in by storing some data about the deepest Node(how deep it is should directly correlate to the size), and use that to roughly calculate which octant it would be if it was at that depth and move upwards if its more efficient.
-            throw new System.NotImplementedException();
-        }
-
-        public void AddElementToNode(OctNode node, OctElement element){
-            throw new System.NotImplementedException();
-        }
-
-        public void SplitNodeForElement(OctNode node, OctElement element){
             throw new System.NotImplementedException();
         }
 

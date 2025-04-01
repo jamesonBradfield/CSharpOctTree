@@ -11,7 +11,7 @@ public struct OctNode
 	// first_child+6 = index to 7nd child (DBL)
 	// first_child+7 = index to 8th child (DBR)
 	public int first_child;
-    // Stores the number of elements in the leaf or -1 if it this node is
+    // Stores the number of elements in the leaf or -1 if this node is
     // not a leaf.
     public int count; 
     public OctNode(int first_child, int count) : this()
