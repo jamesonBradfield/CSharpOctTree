@@ -25,10 +25,13 @@ namespace OctTreeNamespace
 
         public OctTree(Vector3I BoundsSize)
         {
+            //create a leaf node with 0 as its first_child.
             root_node = new OctNode(0, -1);
             this.BoundsSize = BoundsSize;
             allNodes.Add(root_node);
         }
+        // NOTE: this currently doesn't sit well with me as we might split and add our elements twice, part of me wants to keep a "queue" of split nodes and update those lazily.
+        
         ///<Summary>
         /// Adds given element to the octTree, if the node exists we add to it, if it's full, we split and reorder.
         ///</Summary>
@@ -46,7 +49,33 @@ namespace OctTreeNamespace
             // Add the element to the node
             AddElementToNode(nodeIndex, element, elementIndex);
         }
-
+        public void RemoveElement(OctElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UpdateElement(OctElement element)
+        {
+            throw new System.NotImplementedException();
+        }
+        // TODO: might want to add batch element adding,updating,removal
+        // ------------------------------------------------------
+        //
+        // public void UpdateElement(OctElement element)
+        // {
+        //
+        // }
+        //
+        // public void RemoveElement(OctElement element)
+        // {
+        //
+        // }
+        //
+        // public void AddElement(OctElement element)
+        // {
+        //
+        // }
+        // -----------------------------------------------------
+        
         ///<Summary>
         ///</Summary>
         private int FindOrCreateNodeForElement(int nodeIndex, OctElement element, Vector3I currentNodeOrigin, Vector3I currentNodeSize)
@@ -67,7 +96,6 @@ namespace OctTreeNamespace
             }
             // calculate the nodes HalfSize 
             Vector3I halfSize = currentNodeSize.HalfSize();
-            //loop through its octants.
             for (int octant = 0; octant < 8; octant++)
             {
                 Vector3I childOrigin = currentNodeOrigin.CalculateChildMin(halfSize, octant);
@@ -157,7 +185,7 @@ namespace OctTreeNamespace
         }
 
         ///<Summary>
-        /// split a node, and reorders the elements
+        /// split a node.
         ///</Summary>
         private void SplitNode(int nodeIndex, Vector3I currentNodeOrigin, Vector3I currentNodeSize)
         {
@@ -204,35 +232,5 @@ namespace OctTreeNamespace
                 currentElementNodeIndex = nextElementNodeIndex;
             }
         }
-
-        public void RemoveElement(OctElement element)
-        {
-
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdateElement(OctElement element)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        // TODO: might want to add batch element adding,updating,removal
-        // ------------------------------------------------------
-        //
-        // public void UpdateElement(OctElement element)
-        // {
-        //
-        // }
-        //
-        // public void RemoveElement(OctElement element)
-        // {
-        //
-        // }
-        //
-        // public void AddElement(OctElement element)
-        // {
-        //
-        // }
-        // -----------------------------------------------------
     }
 }
